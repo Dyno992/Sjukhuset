@@ -4,31 +4,22 @@ class Patient {
 
     private String name;
     private String sickness;
-    private boolean isSick;
+
 
     Patient(String name) {
-        this.name = name;
-        this.sickness = "";
-        this.isSick = false;
+        this(name,null);
+
     }
 
     Patient(String name, String sickness) {
 
         this.name = name;
-
-        if (sickness == null || sickness.equals("")) {
-            this.isSick = false;
-            this.sickness = "";
-        } else {
-            this.sickness = sickness;
-            this.isSick = true;
-
-        }
+        this.sickness = sickness;
 
     }
 
     boolean isSick() {
-        return this.isSick;
+        return this.sickness != null;
     }
 
     String getSickness() {
@@ -40,8 +31,8 @@ class Patient {
     }
 
     void takeMedication(Medicine name) {
-        if (this.sickness.equals(name.getTreatmentName())) {
-            this.isSick = false;
+        if (isSick() && this.sickness.equals(name.getTreatmentName())) {
+            this.sickness = null;
         }
     }
 
